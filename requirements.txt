@@ -1,0 +1,7 @@
+pandas
+googletrans
+flask
+string
+numpy
+translate
+nltk
