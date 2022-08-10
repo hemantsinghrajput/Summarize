@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'Summarise'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_023F9D3316B5456CB26084CF484F44E3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E82CDA83A882476683D04548F7D55F87 }}
