@@ -1,14 +1,13 @@
 # A very simple Flask Hello World app for you to get started with...
 from flask import Flask,render_template,request
-import pandas as pd
 from googletrans import Translator
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from string import punctuation
 from heapq import nlargest
-import numpy as np
+#import numpy as np
 from translate import Translator
-import nltk
+#import nltk
 #model=pd.read_pickle('/home/hemsingh121/mysite/Salary_mdl.pkl')
 
 app = Flask(__name__)
@@ -37,20 +36,22 @@ def summarize(text, per):
     for sent in sentence_tokens:
         for word in sent:
             if word.text.lower() in word_frequencies.keys():
-                if sent not in sentence_scores.keys():                            
+                if sent not in sentence_scores.keys():
                     sentence_scores[sent]=word_frequencies[word.text.lower()]
                 else:
                     sentence_scores[sent]+=word_frequencies[word.text.lower()]
     select_length=int(len(sentence_tokens)*per)
     summary=nlargest(select_length, sentence_scores,key=sentence_scores.get)
     final_summary=[word.text for word in summary]
-    summary=' '.join(final_summary)
+    summary=''.join(final_summary)
     return summary
 
 @app.route('/prediction',methods=['GET','POST'])
 def predict():
-    /*
-    f=[x for x in request.form.values()]
+    #f=[int(x) for x in request.form.values()]
+    #f=request.form.get('name')
+    if request.method=='POST':
+        f=(request.form["nm"])
     list1 = []
     list1 = f.split('।')
     translation=[]
@@ -59,12 +60,7 @@ def predict():
        translation.append(translator.translate(list1[i]))
     #print(translation)
     translation=str(' '.join(translation))
-    */
-    if request.method=='POST':
-        translation=(request.form["nm"])
-    
-    summ=(summarize(translation, 0.3))
-    /*
+    summ=(summarize(translation, 0.1))
     from translate import Translator
     list1 = []
     list1 = summ.split(',')
@@ -77,7 +73,3 @@ def predict():
 
     translation1=str(' '.join(translation1))
     return render_template('LnB.html',prediction_text=str(translation1))
-*/
-    return render_template('LnB.html',prediction_text=str(summ))
-
-
