@@ -49,6 +49,7 @@ def summarize(text, per):
 
 @app.route('/prediction',methods=['GET','POST'])
 def predict():
+    /*
     f=[x for x in request.form.values()]
     list1 = []
     list1 = f.split('।')
@@ -58,7 +59,12 @@ def predict():
        translation.append(translator.translate(list1[i]))
     #print(translation)
     translation=str(' '.join(translation))
+    */
+    if request.method=='POST':
+        translation=(request.form["nm"])
+    
     summ=(summarize(translation, 0.3))
+    /*
     from translate import Translator
     list1 = []
     list1 = summ.split(',')
@@ -71,4 +77,7 @@ def predict():
 
     translation1=str(' '.join(translation1))
     return render_template('LnB.html',prediction_text=str(translation1))
+*/
+    return render_template('LnB.html',prediction_text=str(summ))
+
 
